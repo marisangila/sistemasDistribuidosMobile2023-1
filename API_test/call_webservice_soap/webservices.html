@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web service</title>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <label>Insira seu cep:</label>
+    <input type="text" id="cep">
+    <br>
+    <input type="button" value="Buscar Endereço" onclick="buscarEndereco()">
+    <br>
+
+    <label>Rua</label>
+    <input type="text" id="rua" />
+    <br>
+    <label>Bairro</label>
+    <input type="text" id="bairro" />
+    <br>
+    <label>Cidade</label>
+    <input type="text" id="cidade" />
+    <br>
+    <label>Estado</label>
+    <input type="text" id="estado" />
+
+</body>
+
+<script>
+    function buscarEndereco() {
+        //Pegando o CEP digitado no caixa de texto.
+        cep = document.getElementById("cep").value
+        //Criando a url com o cep digitado na caixa de texto
+        url = `https://viacep.com.br/ws/${cep}/json/`
+        //Fazendo uma requisição para o webservice do correios. 
+        //Também estou passando a url com o CEP.
+        charmarWebService(url)
+    }
+</script>
+
+</html>
