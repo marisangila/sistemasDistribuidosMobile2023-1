@@ -3,7 +3,6 @@ from xmlrpc.server import SimpleXMLRPCServer
 def mensagem(msg):
     print(msg)
 
-
 def soma(n1,n2)
     soma = n1+n2
     return soma
