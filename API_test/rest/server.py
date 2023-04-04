@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/receber", methods=["GET"])
 def get():
-    return jsonify([{"name":"Hello World!"}]),200
+    return jsonify([{"mensagem":"Hello World!"}]),200
 
 
 @app.route("/enviar", methods=["POST"])

@@ -1,4 +1,5 @@
 import requests
+import os
 
 url = "http://127.0.0.1:5000/receber"
 
@@ -14,3 +15,8 @@ if response.status_code == 200:
 else:
     # Imprime o código de erro HTTP
     print("Erro HTTP %d - %s" % (response.status_code, response.reason))
+
+os.system("PAUSE")
+
+if __name__ == '__main__':
+    app.run(debug=True)

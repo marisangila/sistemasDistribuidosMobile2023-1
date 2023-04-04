@@ -1,5 +1,5 @@
 import multiprocessing
-
+import os
 
 def worker(num, shared_array):
     """Função que é executada em um processo separado"""
@@ -24,3 +24,4 @@ if __name__ == '__main__':
 
     # imprime o array compartilhado atualizado pelos processos
     print(f"shared_array: {list(shared_array)}")
+    os.system("PAUSE")
