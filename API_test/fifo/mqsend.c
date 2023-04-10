@@ -12,21 +12,19 @@ main(int argc, char *argv[]) 12
     int msg;     // mensagem a enviar
                  // abre a fila de mensagens, se existir
     if ((queue = mq_open(QUEUE, O_RDWR)) < 0)
-        18
-        {
-            perror("mq_open");
-            exit(1);
-        }
+    {
+        perror("mq_open");
+        exit(1);
+    }
     for (;;)
     {
         msg = random() % 100; // valor entre 0 e 99
                               // envia a mensagem
         if (mq_send(queue, (void *)&msg, sizeof(msg), 0) < 0)
-            29
-            {
-                perror("mq_send");
-                exit(1);
-            }
+        {
+            perror("mq_send");
+            exit(1);
+        }
         printf("Sent message with value %d\n", msg);
         sleep(1);
     }
