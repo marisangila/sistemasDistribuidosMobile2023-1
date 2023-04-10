@@ -6,12 +6,12 @@
 #include <mqueue.h>
 #include <sys/stat.h>
 
-#define QUEUE "/process_A"
+#define QUEUE "/to_b"
 
-struct Numbers{
+typedef struct{
     int n1;
     int n2;
-};
+}Numbers;
 
 int main(int argc, char *argv[])
 {
@@ -19,10 +19,10 @@ int main(int argc, char *argv[])
     struct mq_attr attr; 	// atributos da fila de mensagens
 
     int sum;             	
-    struct Numbers numbers;
+    Numbers numbers;
     // define os atributos da fila de mensagens
     attr.mq_maxmsg = 10;           // capacidade para 10 mensagens
-    attr.mq_msgsize = sizeof(msg); // tamanho de cada mensagem
+    attr.mq_msgsize = sizeof(numbers); // tamanho de cada mensagem
     attr.mq_flags = 0;
 
     // abre ou cria a fila com permissoes 0666
@@ -33,16 +33,16 @@ int main(int argc, char *argv[])
     }
 
     // recebe cada mensagem e imprime seu conteudo
-    while (true)
+    for (;;)
     {
-        if (mq_receive(mq, (char *) &numbers, sizeof(Numbers), NULL) == -1) {
+        if (mq_receive(queue, (char *) &numbers, sizeof(Numbers), NULL) == -1) {
             perror("mq_receive");
             exit(1);
         }
 
         sum = numbers.n1 + numbers.n2;
 
-        if (mq_send(mq, (char *) &sum, sizeof(int), 0) == -1) {
+        if (mq_send(queue, (char *) &sum, sizeof(int), 0) == -1) {
             perror("mq_send");
             exit(1);
         }
@@ -50,6 +50,6 @@ int main(int argc, char *argv[])
         sleep(1);
 
         printf("Received message with value %d and %d. \n", numbers.n1,numbers.n2);
-        print("Sent message with sum value: %d. \n",sum)
+        printf("Sent message with sum value: %d. \n",sum);
     }
 }
