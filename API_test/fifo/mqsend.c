@@ -5,8 +5,8 @@
 #include <mqueue.h>
 #include <unistd.h>
 
-#define QUEUE "/my_queue" int
-main(int argc, char *argv[]) 12
+#define QUEUE "/my_queue"
+int main(int argc, char *argv[])
 {
     mqd_t queue; // descritor da fila
     int msg;     // mensagem a enviar
