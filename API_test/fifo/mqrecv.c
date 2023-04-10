@@ -10,9 +10,9 @@
 
 int main(int argc, char *argv[])
 {
-    mqd_t queue;         // descritor da fila de mensagens
-    struct mq_attr attr; // atributos da fila de mensagens
-    int msg;             // as mensagens são números inteiros
+    mqd_t queue;         	// descritor da fila de mensagens
+    struct mq_attr attr; 	// atributos da fila de mensagens
+    int msg;             	// as mensagens são números inteiros
 
     // define os atributos da fila de mensagens
     attr.mq_maxmsg = 10;           // capacidade para 10 mensagens
