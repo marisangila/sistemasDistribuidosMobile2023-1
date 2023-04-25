@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exa="http://example.com/myservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <exa:AddResponse>
+         <exa:result>7</exa:result>
+      </exa:AddResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

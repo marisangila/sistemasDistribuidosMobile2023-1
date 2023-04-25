@@ -1,0 +1,30 @@
+<empresa nome="Empresa XYZ">
+  <endereco>
+    <rua>Rua dos Bobos</rua>
+    <numero>0</numero>
+    <bairro>Centro</bairro>
+    <cidade>São Paulo</cidade>
+    <estado>SP</estado>
+  </endereco>
+  <funcionarios>
+    <funcionario>
+      <nome>João</nome>
+      <idade>30</idade>
+      <cargo>Engenheiro</cargo>
+    </funcionario>
+    <funcionario>
+      <nome>Maria</nome>
+      <idade>25</idade>
+      <cargo>Designer</cargo>
+    </funcionario>
+    <funcionario>
+      <nome>Pedro</nome>
+      <idade>35</idade>
+      <cargo>Gerente</cargo>
+    </funcionario>
+  </funcionarios>
+  <faturamento>
+    <anoAtual>1000000</anoAtual>
+    <anoPassado>800000</anoPassado>
+  </faturamento>
+</empresa>

@@ -1,0 +1,32 @@
+{
+    "nome": "Empresa XYZ",
+    "endereco": {
+      "rua": "Rua dos Bobos",
+      "numero": 0,
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "estado": "SP"
+    },
+    "funcionarios": [
+      {
+        "nome": "João",
+        "idade": 30,
+        "cargo": "Engenheiro"
+      },
+      {
+        "nome": "Maria",
+        "idade": 25,
+        "cargo": "Designer"
+      },
+      {
+        "nome": "Pedro",
+        "idade": 35,
+        "cargo": "Gerente"
+      }
+    ],
+    "faturamento": {
+      "anoAtual": 1000000,
+      "anoPassado": 800000
+    }
+  }
+  
