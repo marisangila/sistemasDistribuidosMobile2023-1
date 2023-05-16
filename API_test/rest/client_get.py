@@ -3,8 +3,6 @@ import os
 
 url = "http://127.0.0.1:5000/receber"
 
-#payload = {'username': 'johndoe', 'password': 'secretpassword'}
-
 # Realiza a solicitação HTTP POST com os parâmetros e cabeçalhos
 response = requests.get(url, headers={'Content-Type': 'application/json'})
 
@@ -18,5 +16,3 @@ else:
 
 os.system("PAUSE")
 
-if __name__ == '__main__':
-    app.run(debug=True)
