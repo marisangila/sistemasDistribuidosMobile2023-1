@@ -35,3 +35,4 @@ while True:
         print("Erro HTTP %d - %s" % (response.status_code, response.reason))
 
 os.system("PAUSE")
+# link para teste: https://colab.research.google.com/drive/1xlHTmDHuFcweVRo13dga8xSlQyPuhZf6?usp=sharing
