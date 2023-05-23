@@ -1,0 +1,40 @@
+import requests
+import os
+
+
+#Pede ao usuário um código da rua.
+cep = input("Informe um código da rua:")
+
+
+#Concatena a URL e o parâmetro necessário (CEP informado pelo usuário)
+url = "https://brasilapi.com.br/api/cep/v2/"+cep
+
+
+# Realiza a solicitação HTTP POST com os parâmetros e cabeçalhos
+response = requests.get(url, headers={'Content-Type': 'application/json'})
+
+
+# Verifica se a resposta foi bem sucedida (código 200)
+if response.status_code == 200:
+
+
+    data = response.json()
+
+
+    # Imprime  o conteúdo da resposta  sem nenhum tratamento.
+    #print(data)
+
+
+    #Imprime o conteúdo da resposta de forma que o usuário consiga interpretar.
+    #imprime somente a chave  'street'.
+    print("Rua:", data['street'])
+   
+    #imprime todos os itens dentro da chave 'street'.
+    for item in data['street']:
+      print("Rua:",item)
+   
+else:
+    # Imprime o código de erro HTTP
+    print("Erro HTTP %d - %s" % (response.status_code, response.reason))
+   
+os.system("PAUSE")
