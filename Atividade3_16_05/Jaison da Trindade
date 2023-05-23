@@ -1,1 +1,39 @@
+import requests
+import os
+
+#Pede ao usuário um código de área.
+ID = input("Informe um código de área para obter o numero de conjunto de distritos do Brasil:")
+
+#Concatena a URL e o parâmetro necessário (DDD informado pelo usuário)
+url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados//distritos"+ID
+
+# Realiza a solicitação HTTP POST com os parâmetros e cabeçalhos
+response = requests.get(url, headers={'Content-Type': 'application/json'})
+
+# Verifica se a resposta foi bem sucedida (código 200)
+if response.status_code == 200:
+
+    data = response.json()
+
+    # Imprime  o conteúdo da resposta  sem nenhum tratamento.
+    print(data)
+
+    #Imprime o conteúdo da resposta de forma que o usuário consiga interpretar.
+    #imprime somente a chave  'state'.
+    ##print("Estado:", data['state'])
+   
+    #imprime todos os itens dentro da chave 'cities'.
+   ## for item in data['cities']:
+      ##print("Cidade:",item)
+   
+else:
+    # Imprime o código de erro HTTP
+    print("Erro HTTP %d - %s" % (response.status_code, response.reason))
+
+  
+    # Imprime  o conteúdo da resposta  sem nenhum tratamento.
+    print(data)
+
+   
+os.system("PAUSE")
 
