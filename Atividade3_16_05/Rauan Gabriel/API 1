@@ -1,1 +1,35 @@
+import requests
+import os
 
+
+#ESSA API BUSCA CEP
+
+
+# Solicita a inclusão de um CEP.
+cep = input("Informe um CEP:")
+
+# Concatena a URL e o parâmetro necessário (CEP informado pelo usuário)
+url = "https://brasilapi.com.br/api/cep/v1/" + cep
+
+# Realiza a solicitação HTTP GET
+response = requests.get(url)
+
+# Verifica se a resposta foi bem sucedida (código 200)
+if response.status_code == 200:
+
+    data = response.json()
+
+
+    print("CEP:", data('cep'))
+    print("Estado:", data('state'))
+    print("Cidade:", data('city'))
+    print("Vizinhança:", data('neighborhood'))
+    print("Rua:", data('street'))
+    print("Serviço:", data('service'))
+
+else:
+    # Imprime o código de erro HTTP
+    print("Erro HTTP %d - %s" % (response.status_code, response.reason))
+
+
+os.system("PAUSE")
