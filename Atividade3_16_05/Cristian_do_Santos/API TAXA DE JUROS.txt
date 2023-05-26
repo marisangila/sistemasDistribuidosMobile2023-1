@@ -1,0 +1,31 @@
+import requests
+import os
+
+taxa = input("Informe a taxa:")
+
+#Concatena a URL e o parâmetro necessário (DDD informado pelo usuário)
+url = "https://brasilapi.com.br/api/taxas/v1"+taxa
+
+# Realiza a solicitação HTTP POST com os parâmetros e cabeçalhos
+response = requests.get(url, headers={'Content-Type': 'application/json'})
+
+# Verifica se a resposta foi bem sucedida (código 200)
+if response.status_code == 200:
+
+    data = response.json()
+
+    # Imprime  o conteúdo da resposta  sem nenhum tratamento.
+    #print(data)
+
+    #Imprime o conteúdo da resposta de forma que o usuário consiga interpretar.
+    #imprime somente a chave  'state'.
+    print("data:", data['date'])
+    print("nome:", data['valor'])
+    print("tipo:", data['type'])
+    
+
+else:
+    # Imprime o código de erro HTTP
+    print("Erro HTTP %d - %s" % (response.status_code, response.reason))
+   
+os.system("PAUSE")
