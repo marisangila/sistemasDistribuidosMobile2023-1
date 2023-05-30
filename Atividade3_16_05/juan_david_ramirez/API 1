@@ -1,0 +1,12 @@
+import requests
+import os
+
+
+country_name = input("Digite um pais para trazer informaçoes detalhadas: ")
+url = f"https://restcountries.com/v3.1/name/{country_name}"
+response = requests.get(url)
+
+
+data = response.json()
+print(data)
+os.system("PAUSE")
