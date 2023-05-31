@@ -1,0 +1,15 @@
+import requests
+import os
+
+username = input("Digite qualquer nome de um usuario de github: ")
+url = f"https://api.github.com/users/{username}"
+response = requests.get(url)
+
+data = response.json()
+print("Informações do usuário:")
+print("Nome de usuário:", data["login"])
+print("Nome:", data["name"])
+print("Localização:", data["location"])
+
+os.system("PAUSE")
+
