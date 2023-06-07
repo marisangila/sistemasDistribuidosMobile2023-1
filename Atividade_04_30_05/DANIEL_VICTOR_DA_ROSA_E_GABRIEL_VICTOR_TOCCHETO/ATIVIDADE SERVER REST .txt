@@ -1,0 +1,294 @@
+||||||||||||||||| FONTE ||||||||||||||| 
+             LINGUAGEM ADVPL
+|||||||||||||||||||||||||||||||||||||||
+
+//BIBLIOTECAS
+#Include 'RestFul.ch'
+#Include 'TOTVS.CH'
+#INCLUDE "TOPCONN.CH"
+
+
+WSRESTFUL cTesClient DESCRIPTION 'CLIENTES' Format "application/json"
+
+	//WSDATA cgc as String
+	//WSDATA Maiordeidade as String
+
+	WSMETHOD GET Clientes;
+		DESCRIPTION "Retorna a lista de clientes";
+		WSSYNTAX "api/v1/clientes";
+		PATH "api/v1/clientes";
+		PRODUCES APPLICATION_JSON
+		
+	WSMETHOD GET Clientes;
+		DESCRIPTION "Retorna a lista de clientes maiores de idade";
+		WSSYNTAX "api/v1/Clientes";
+		PATH "api/v1/Clientes";
+		PRODUCES APPLICATION_JSON
+
+	WSMETHOD POST Clientes;
+		DESCRIPTION "Adicionar o clientes";
+		WSSYNTAX "api/v1/clientes";
+		PATH "api/v1/clientes";
+		PRODUCES APPLICATION_JSON
+
+END WSRESTFUL
+
+
+WSMETHOD GET clientes WSSERVICE cTesClient
+
+	local aArray             := {}
+	Local oJson              := JsonObject():New()
+	local cResponse          :=""
+
+
+	DbSelectArea("SA1")
+	SA1->(dbgotop())
+
+	//Enquanto não acabar os dados da TABELA SA1
+	WHILE SA1->(!Eof())
+
+		aAdd(aArray,JsonObject():New() )
+		nPos := Len(aArray)
+		aArray[nPos]['cod']          := ALLTRIM(SA1->A1_COD)
+		aArray[nPos]['loja']         := ALLTRIM(SA1->A1_LOJA)
+		aArray[nPos]['nome']         := ALLTRIM(SA1->A1_NOME)
+		aArray[nPos]['pessoa']       := ALLTRIM(SA1->A1_PESSOA)
+		aArray[nPos]['endereco']     := ALLTRIM(SA1->A1_END)
+		aArray[nPos]['cpf']          := ALLTRIM(SA1->A1_CGC)
+		aArray[nPos]['tipo']         := ALLTRIM(SA1->A1_TIPO) //F- Cons Final , L- Produtor Rural, R- Revendedor , S- Solidario, X- Exportação
+		aArray[nPos]['estado']       := ALLTRIM(SA1->A1_EST)
+		aArray[nPos]['municipio']    := ALLTRIM(SA1->A1_MUN)
+		aArray[nPos]['numero']       := ALLTRIM(SA1->A1_NREDUZ)
+
+		// PROXIMO REGISTRO DA SA1
+		SA1->(DbSkip())
+
+	ENDDO
+
+    //RECEBE OS DADOS
+	oJson['Registros'] := aArray
+
+	cResponse:=FwJsonSerialize(oJson)
+
+	//RETORNA OS DADOS PARA O POSTMAM
+	self:setResponse((cResponse))
+
+return
+
+
+WSMETHOD GET clientes WSRECEIVE Maiordeidade WSSERVICE cTesClient
+	local aArray     := {}
+	Local cSN      := iif(valtype(self:Maiordeidade)=="U", "", self:Maiordeidade) // PARA SELECIONAR APENAS MAIOR DE IDADE COLOCAR A KEY:Maiordeidade / parametro:SIM
+	Local cResponse  := ""                                                        // Ou colocar o parametro como NAO para pegar os menores de idade
+	Local cQuery AS Character
+	local oJson := JsonObject():New()
+	locaL dData1 :=()
+	local dData02:=()
+    
+	dData1:=YearSub( date() , 18 ) //Faz a Verificação de maioridade, com base na data forncecida 
+	dData02:=DTOS(dData1) // Pega a data e tranforma em string 
+
+	cQuery := "SELECT  ZZD_COD, ZZD_NOME, ZZD_CGC, ZZD_DATA, ISNULL(CAST(CAST(ZZD_MEMO AS VARBINARY(8000)) AS VARCHAR(8000)),'')ZZD_MEMO, ZZD_ESTADO, ZZD_CIDADE, ZZD_RUA, ZZD_ATIVO FROM "+ RETSQLNAME("ZZD")+CRLF //CRIA O TEXTO USAR ANTES DO ALIAS
+	cQuery += "WHERE D_E_L_E_T_ = '' "
+
+	if !Empty(cSN == "SIM") //ADCIONA CONDIÇÕA PARA QUERY
+		cQuery += "AND ZZD_DATA < ="+dData02 
+		
+	else
+	    cQuery += "AND ZZD_DATA > ="+dData02
+	
+	endif
+
+
+	If Select('cAlias') > 0   //VERIFICA SE EXISTE ALGUMA ALIAS, SE NÃO EXISTIR ELE VAI PARA BAIXO
+		Dbselectarea('cAlias')
+		cAlias->(DbClosearea())
+	EndIf
+
+	TcQuery cQuery New Alias cAlias    //CRIA UM NOVO ALIAS
+	
+    
+    
+	DO While cAlias->(!Eof()) //Enquando nÃ£o ter acabado os dados da tabela ele continua buscando
+
+		//Criar Json
+		aAdd(aArray,JsonObject():New() )
+		nPos := Len(aArray)
+        aArray[nPos]['cod']                       := AllTrim(cAlias->ZZD_COD)
+		aArray[nPos]['nome']                      := AllTrim(cAlias->ZZD_NOME)
+		aArray[nPos]['cpf']                       := AllTrim(cAlias->ZZD_CGC)
+		aArray[nPos]['data de nascimento']        := AllTrim(cAlias->ZZD_DATA)
+		aArray[nPos]['memo']                      := AllTrim(cAlias->ZZD_MEMO) 
+        aArray[nPos]['estado']                    := AllTrim(cAlias->ZZD_ESTADO)
+        aArray[nPos]['cidade']                    := AllTrim(cAlias->ZZD_CIDADE)
+        aArray[nPos]['rua']                       := AllTrim(cAlias->ZZD_RUA)
+        aArray[nPos]['ativo']                     :=        (cAlias->ZZD_ATIVO)
+
+
+		cAlias->(DbSkip())
+
+
+
+	Enddo
+
+	oJson['Registros'] := aArray
+
+	cResponse:=FwJsonSerialize(oJson)
+	//Resposta
+	self:setResponse((cResponse))
+
+Return
+
+
+
+WSMETHOD POST clientes WSSERVICE cTesClient
+
+    // COMO É TELA EM MVC, CARREGA O MODELO PARA NÃO PRECISAR SER VALIDADO OS CAMPOS 
+	Local oModel       := FwLoadModel('CRMA980')
+
+	Local cJson        := self:getContent()
+	Local oJson        := JsonObject():New()
+
+   //VERIFICA ERRO
+	cVldErro:=(oJson:FromJson(cJson))
+	IF !Empty(cVldErro)
+		SetRestFault(400, "Erro no Json")
+		return .F.
+	ENDIF
+
+    // ABRE A AREA DA TABELA SA1
+	DbSelectArea("SA1")
+	// SETA A ORDEM
+	SA1->(DbSetOrder(1))
+	// SETA A OPERAÇÃO DE INCLUSÃO 
+	oModel:SetOperation(3)
+	oModel:Activate()
+
+	Self:SetContentType("application/json")
+    
+	//CARREGA OS DADOS NOS CAMPOS 
+	oModel:GetModel('SA1MASTER'):SetValue("A1_NOME"         ,   oJson['nome'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_PESSOA"       ,   oJson['pessoa'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_END"          ,   oJson['endereco'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_CGC"          ,   oJson['cpf'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_NREDUZ"       ,   oJson['numero'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_TIPO"         ,   oJson['tipo']) //F- Cons Final , L- Produtor Rural, R- Revendedor , S- Solidario, X- Exportação
+	oModel:GetModel('SA1MASTER'):SetValue("A1_EST"          ,   oJson['estado'])
+	oModel:GetModel('SA1MASTER'):SetValue("A1_COD_MUN"          ,   oJson['municipio'])
+
+
+    // VALIDA SE PODERA SER INSERIDO, NO CASO VERIFICA SE EM DETERMINADO CAMPO NÃO FOI INSERIDO DADO ERRADO. 
+	IF !SA1->(DBSeek(xFilial("SA1") + (oJson['cpf']) ))
+		IF oModel:VldData()
+			oModel:CommitData()
+			conout("Registro INCLUIDO!")
+		ELSE
+			VarInfo("Erro ao incluir",oModel:GetErrorMessage())
+		ENDIF
+		self:setResponse(oJson:toJson())
+
+	else
+		self:setResponse("CPF JA CADASTRADO")
+
+
+	ENDIF
+
+	self:setResponse(oJson:toJson())
+
+
+return
+
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+CAMINHO POSTMAN 
+
+http://localhost:8090/rest/ctesclient/api/v1/clientes
+
+JSON POST 
+
+{
+    "municipio": "09102",
+    "cpf": "05993466000159", // OU CNPJ
+    "tipo": "F",
+    "estado": "SC",
+    "pessoa": "J",
+    "numero": "TESTE",
+    "nome": "DANIEL TESTE 1",
+    "endereco": "RUA TOTVS"
+}
+
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+SERVER REST.INI 
+
+[rest]
+SourcePath=C:\TOTVS12\Protheus\Protheus\apo\rest
+RootPath=C:\TOTVS12\Protheus\protheus_data
+StartPath=\system\
+RpoCustom=C:\TOTVS12\Protheus\Protheus\apo\rest\custom.rpo
+x2_path=
+RpoDb=top
+RpoLanguage=multi
+RpoVersion=120
+LocalFiles=CTREE
+Trace=0
+localdbextension=.dtc
+TopMemoMega=1
+StartSysInDB=1
+DBDataBase=MSSQL
+DBAlias=PROTHEUS
+DBServer=localhost
+DBPort=7890
+;DbODBCDriver=SQL Server Native Client 11.0
+FWtracelog=1
+
+[General]
+BUILDKILLUSERS=1
+MAXSTRINGSIZE=10
+consolelog=1
+
+[Drivers]
+Active=TCP
+
+[TCP]
+TYPE=TCPIP
+Port=1236
+
+[Service]
+Name=.TOTVS-Appserver12_rest
+DisplayName=TOTVS | Appserver 12_rest
+
+[LICENSECLIENT]
+server=localhost
+port=5555
+
+[WEBAPP]
+port=4322
+[WebApp/webapp]
+MPP=
+
+[HTTPV11]
+Enable=1
+Sockets=HTTPREST
+
+[HTTPREST]
+Port=8090
+IPsBind=
+URIs=HTTPURI
+Security=0
+
+[HTTPURI]
+URL=/rest
+PrepareIn=All
+Instances=1,1
+CORSEnable=1
+AllowOrigin=*
+
+[HTTPJOB]
+MAIN=HTTP_START
+ENVIRONMENT=rest
+
+[ONSTART]
+JOBS=HTTPJOB
+REFRESHRATE=120
