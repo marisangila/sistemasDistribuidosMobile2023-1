@@ -1,0 +1,52 @@
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Lista de produtos
+produtos = []
+
+# Ver Todos os produtos
+@app.route('/produtos', methods=['GET'])
+def get_produtos():
+    return jsonify(produtos)
+
+# Ver todos produtos por id
+@app.route('/produtos/<int:produto_id>', methods=['GET'])
+def get_produto(produto_id):
+    for produto in produtos:
+        if produto['id'] == produto_id:
+            return jsonify(produto)
+    return jsonify({'message': 'Produto não encontrado'}), 404
+
+# Adicionar novo Produto
+@app.route('/produtos', methods=['POST'])
+def add_produto():
+    novo_produto = {
+        'id': len(produtos) + 1,
+        'nome': request.json['nome'],
+        'preco': request.json['preco']
+    }
+    produtos.append(novo_produto)
+    return jsonify(novo_produto), 201
+
+# Atualizar informaçoes do Produto
+@app.route('/produtos/<int:produto_id>', methods=['PUT'])
+def update_produto(produto_id):
+    for produto in produtos:
+        if produto['id'] == produto_id:
+            produto['nome'] = request.json['nome']
+            produto['preco'] = request.json['preco']
+            return jsonify(produto)
+    return jsonify({'message': 'Produto não encontrado'}), 404
+
+# Excluir Produto
+@app.route('/produtos/<int:produto_id>', methods=['DELETE'])
+def delete_produto(produto_id):
+    for produto in produtos:
+        if produtos['id'] == produto_id:
+            produtos.remove(produto)
+            return jsonify({'message': 'Produto excluído'})
+    return jsonify({'message': 'Produto não encontrado'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
