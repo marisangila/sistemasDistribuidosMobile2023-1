@@ -1,0 +1,47 @@
+EndPoints: Get e Post
+http://localhost:8080/posts 
+http://localhost:8080/users
+
+EndPoints: Get
+http://localhost:8080/posts/{id}
+http://localhost:8080/users/{id} -> trás somente 1
+http://localhost:8080/fullsearch -> trás tudo que esta cadastrado
+
+EndPoints: PUT e DELETE
+http://localhost:8080/posts/{id}
+http://localhost:8080/users/{id}
+
+inserir Usuario: 
+{
+  "name": "Jose",
+  "email": "jose@gmail.com"
+}
+
+inserir um post:
+
+{
+  "date":"2023-06-10T00:00:00.000:00",
+  "title": "partiu viajem",	
+  "body": "Vou viajar para sao paoulo abraços",
+  "author":{
+      "id":"34bdccbccd23de12ec3dd3",
+	"name":"Maria Brown"
+ }
+
+}
+
+inserir um comentario:
+
+{
+	"text":"boa viajem",
+	"date":"2023-07-10T00:00:00.000:00",
+	"author":{
+     		 "id":"34bdccbccd23de12ec3dd3",
+		"name":"Maria Brown"
+ }
+
+}
+
+
+
+
