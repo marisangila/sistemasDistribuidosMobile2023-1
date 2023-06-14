@@ -22,3 +22,20 @@ for currency in currencies:
     else:
         # Parece que essa moeda não foi encontrada. Será que digitamos certo?
         print('Ah não! Não encontrei a moeda {} na API. :('.format(currency))
+
+        
+# saida do aplicativo acima:
+#C:\Users\fernando.schumacher\PycharmProjects\Sociesc\venv\Scripts\python.exe C:/Users/fernando.schumacher/PycharmProjects/Sociesc/main.py
+#Nome da moeda: Dólar Americano/Real Brasileiro
+#Alta do dia: 4.865
+#Baixa do dia: 4.8488
+
+#Nome da moeda: Euro/Real Brasileiro
+#Alta do dia: 5.2635
+#Baixa do dia: 5.24
+
+#Nome da moeda: Bitcoin/Real Brasileiro
+#Alta do dia: 127523
+#Baixa do dia: 125669
+
+#Process finished with exit code 0
