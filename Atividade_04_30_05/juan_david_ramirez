@@ -1,0 +1,103 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+
+
+let autores = [
+  { id: 1, nome: 'Autor 1' },
+  { id: 2, nome: 'Autor 2' },
+  { id: 3, nome: 'Autor 3' }
+];
+
+let livros = [
+  { id: 1, titulo: 'Livro 1', autor_id: 1 },
+  { id: 2, titulo: 'Livro 2', autor_id: 2 },
+  { id: 3, titulo: 'Livro 3', autor_id: 1 }
+];
+
+
+app.get('/autores', (req, res) => {
+  res.json(autores);
+});
+
+
+app.get('/autores/:id', (req, res) => {
+  const autor = autores.find(autor => autor.id === parseInt(req.params.id));
+  if (!autor) {
+    res.status(404).json({ error: 'Autor não encontrado.' });
+    return;
+  }
+
+  res.json(autor);
+});
+
+
+app.post('/autores', (req, res) => {
+  const { nome } = req.body;
+
+  if (!nome) {
+    res.status(400).json({ error: 'Campo "nome" obrigatório.' });
+    return;
+  }
+
+  const id = autores.length + 1;
+  const novoAutor = { id, nome };
+  autores.push(novoAutor);
+
+  res.status(201).json(novoAutor);
+});
+
+
+app.put('/autores/:id', (req, res) => {
+  const autorIndex = autores.findIndex(autor => autor.id === parseInt(req.params.id));
+  if (autorIndex === -1) {
+    res.status(404).json({ error: 'Autor não encontrado.' });
+    return;
+  }
+
+  const { nome } = req.body;
+
+  if (!nome) {
+    res.status(400).json({ error: 'Campo "nome" obrigatório.' });
+    return;
+  }
+
+  autores[autorIndex].nome = nome;
+  res.json(autores[autorIndex]);
+});
+
+
+app.delete('/autores/:id', (req, res) => {
+  const autorIndex = autores.findIndex(autor => autor.id === parseInt(req.params.id));
+  if (autorIndex === -1) {
+    res.status(404).json({ error: 'Autor não encontrado.' });
+    return;
+  }
+
+  autores.splice(autorIndex, 1);
+  res.sendStatus(204);
+});
+
+// Obter todos os livros
+app.get('/livros', (req, res) => {
+  res.json(livros);
+});
+
+
+app.get('/livros/:id', (req, res) => {
+  const livro = livros.find(livro => livro.id === parseInt(req.params.id));
+  if (!livro) {
+    res.status(404).json({ error: 'Livro não encontrado.' });
+    return;
+  }
+
+  res.json(livro);
+});
+
+// Inserir um novo livro
+app.post('/livros', (req, res) => {
+  const { titulo, autor_id } = req.body;
+
+  if __name__ == '__main__':
+    app.run(debug=True)  
