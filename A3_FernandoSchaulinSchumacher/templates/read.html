@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos os Livros</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='listar.css') }}">
+</head>
+<body>
+    <h1>Aqui estão todos os nossos {{ livros|length }} livros:</h1>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Escritor</th>
+            <th>Publicadora</th>
+            <th>Localização</th>
+        </tr>
+        {% for livro in livros %}
+        <tr>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.escritor }}</td>
+            <td>{{ livro.publicadora }}</td>
+            <td>{{ livro.localizacao }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/home">Voltar para a Home</a>
+</body>
+</html>

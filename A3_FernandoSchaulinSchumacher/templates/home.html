@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+    <h1>Bem-vindo(a), {{ username }}!</h1>
+
+    <div class="menu">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('create') }}">Criar</a></li>
+            <li><a href="{{ url_for('read') }}">Listar</a></li>
+            <li><a href="{{ url_for('search') }}">Editar/Excluir</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h3>O que você deseja fazer?</h3>
+        <p>Atualmente em nosso banco de dados temos {{ book_count }} livros.</p>
+        <!-- Conteúdo adicional aqui -->
+    </div>
+
+    <div class="footer">
+        <a href="{{ url_for('login') }}" class="button">Sair</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Novo Livro Ao Acervo Pessoal</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Adicionar Novo Livro</h1>
+    <form method="post">
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo"><br>
+        <label for="escritor">Escritor:</label><br>
+        <input type="text" id="escritor" name="escritor"><br>
+        <label for="publicadora">Publicadora:</label><br>
+        <input type="text" id="publicadora" name="publicadora"><br>
+        <label for="localizacao">Localização:</label><br>
+        <input type="text" id="localizacao" name="localizacao"><br>
+        <input type="submit" value="Adicionar Livro">
+    </form>
+    {% if msg %}
+    <p>{{ msg }}</p>
+    {% endif %}
+    <a href="/home">Voltar para a Home</a>
+</body>
+</html>

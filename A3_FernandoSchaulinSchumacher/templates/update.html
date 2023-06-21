@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atualizar Livro</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='update.css') }}">
+</head>
+<body>
+    <h1>Atualizar Livro</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="{{ livro.titulo if livro else '' }}">
+        </div>
+        <div class="form-group">
+            <label for="escritor">Escritor:</label>
+            <input type="text" id="escritor" name="escritor" value="{{ livro.escritor if livro else '' }}">
+        </div>
+        <div class="form-group">
+            <label for="publicadora">Publicadora:</label>
+            <input type="text" id="publicadora" name="publicadora" value="{{ livro.publicadora if livro else '' }}">
+        </div>
+        <div class="form-group">
+            <label for="localizacao">Localização:</label>
+            <input type="text" id="localizacao" name="localizacao" value="{{ livro.localizacao if livro else '' }}">
+        </div>
+        <button type="submit" class="button">Atualizar Livro</button>
+        <a href="{{ url_for('home') }}" class="button">Home</a>
+        <a href="{{ url_for('search') }}" class="button">Voltar</a>
+    </form>
+
+    <p class="legend">Legenda: Você está editando o registro do livro selecionado na página de pesquisa</p>
+
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+</body>
+</html>

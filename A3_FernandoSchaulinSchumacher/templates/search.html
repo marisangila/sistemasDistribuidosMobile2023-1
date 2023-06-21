@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar e Exclusao de Livros</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search.css') }}">
+    <script>
+        function confirmDelete(livroNome) {
+            return confirm("Tem certeza de que deseja excluir o livro '" + livroNome + "'?");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Pesquisar Livros para Edição e Exclusão</h1>
+
+        <form action="{{ url_for('search') }}" method="POST">
+            <div class="form-group">
+                <input type="text" name="bookname" placeholder="Digite o nome do livro">
+                <button type="submit">Pesquisar</button>
+            </div>
+        </form>
+
+  {% if results %}
+    <div class="search-results">
+        <h3>Dados Disponíveis para Edição e Exclusão:</h3>
+        <ul>
+            {% for livro in results|sort(attribute='titulo') %}
+                <li>
+                    <div class="book-details">
+                        <span class="book-title">
+                            <a href="{{ url_for('update', id=livro.id) }}">{{ livro.titulo }}</a>
+                        </span>
+                        <span class="book-author">Escritor: {{ livro.escritor }}</span>
+                        <span class="book-id">
+                            <a href="{{ url_for('delete', id=livro.id) }}" onclick="return confirmDelete('{{ livro.titulo }}');">[Excluir]</a>
+                        </span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+
+        <div class="navigation">
+            <a href="{{ url_for('home') }}">Voltar</a>
+            <a href="{{ url_for('login') }}">Sair</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Legenda: <span class="delete-text">Índice em vermelho para excluir o cadastro pesquisado</span> | <span class="edit-text">Título em azul para editar quando clicado</span></p>
+    </div>
+</body>
+</html>
