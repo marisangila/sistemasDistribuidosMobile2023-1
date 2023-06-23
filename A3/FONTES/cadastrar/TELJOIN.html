@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Turismo em Joinville</title>
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+  <script src="script.js"></script>
+
+<style>
+
+a{
+  text-decoration: none;
+}
+
+nav{
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  background-color: #76AF50;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  transition: width 0.3s;
+}
+
+nav a {
+  color: white;
+  font-size: 25px;
+  display: block;
+  padding: 12px 10px 12px 32px;
+}
+
+nav a:hover{
+  color:#76AF50;
+  background-color: white;
+}
+
+</style>
+
+</head>
+<body>
+  <header id="cabecalho">
+      <div class="header-container">
+        <img src="./imagens/tresriscos.png" alt="Logo" class="header-logo" onclick="abrirMenuLateral()">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="Pesquisar por outra cidade">
+          <button class="search-button">Pesquisar</button>
+        </div>
+      </div>
+    </header>
+
+    <nav id="menuLateral">
+
+      <a href="#" onclick="fecharMenuLateral()"> Fechar</a>
+      <a href="./TELINIC.html">Home</a>
+      <a href="informacoes_usuario.php">Meus Dados</a>
+      <a href="faleConosco.php">Fale Conosco</a>
+      <a href="desconectar.php">Sair</a>
+  
+    </nav>
+
+  <h1 class="title">Joinville</h1> 
+
+  <main id="conteudo">
+
+    <div class="sections-container">
+    <div class="section" id="culinaria">
+      <h2 class="section-title">Culinária</h2>
+      <p class="section-text">Explore a deliciosa culinária de Joinville, com os deliciosos pratos tradicionais.</p>
+      <img src="./imagens/culi Join.jpg" alt="Culinária" class="section-image" style="width: 500px;">
+    </div>
+    
+    <div class="section" id="hospedagem">
+      <h2 class="section-title">Hospedagem</h2>
+      <p class="section-text">Encontre opções de hospedagem confortáveis e aconchegantes para sua estadia em Joinville.</p>
+      <img src="./imagens/hotel join.jpg" alt="Hospedagem" class="section-image" style="width: 500px;">
+    </div>
+    
+    <div class="section" id="pontos-turisticos">
+      <h2 class="section-title">Pontos Turísticos</h2>
+      <p class="section-text">Venha se maravilhar com locais lindos e históricos espalhados pela cidade, que detém o título de ser a cidade das flores, dança e bicicleta.</p>
+      <img src="./imagens/turis join.jpg" alt="Pontos Turísticos" class="section-image" style="width: 500px;">
+    </div>
+  </div>
+
+   <div class="topics-container">
+    <div class="topic">
+     <h2 class="topic-title">Culinária</h2>
+
+     <p class="topic-text"><strong><br>Hackepeter:</strong> É um prato típico alemão feito a base de carne crua moída com alguns temperos e condimentos. Na Alemanha, o prato é servido com carne de porco, já no Brasil, devido ao baixo consumo de carne suína é servido sempre com carne bovina.</p>
+     <BR>
+     <h3>Onde pedir?</h3>
+     <BR>
+      <p class="topic-text">Restaurante Cantina Don Brunno. <br> Rua Dr. João Colin, 1163 América, Joinville, Santa Catarina 89204-001 Brasil. <br> Contato:55 (47)3422-2156</p>
+      <div class="sdiv">
+        <div id="conteinerA" class="Imgdiv">
+          <img src="./imagens/culi Join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+         </div>
+     
+         <div id="conteinerB" class="Imgdiv"> 
+          <img src="./imagens/culi 1.2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+         </div>
+     
+         <div id="conteinerC" class="Imgdiv"> 
+          <img src="./imagens/culi 1.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+         </div>
+     
+         <div id="conteinerD" class="Imgdiv">
+          <img src="./imagens/culi 1.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+         </div>
+      <br> <br>
+    </div>
+
+     <br>
+
+     <p class="topic-text"><strong>Marreco recheado:</strong> O delicioso marreco recheado é tradicionalíssimo em Joinville. Também já comemos em Jaraguá do Sul, cidade vizinha. Geralmente vem acompanhado de repolho roxo, purê de maçã e nhoque de batata doce recheado com banana. Nossa indicação é por experimentá-lo numa subida à Serra Dona Francisca, apreciando as belezas naturais da nossa região, parar para tomar um café na serra e, se estiver calor, tomar banho de rio no Quiriri.</p>
+     <BR>
+     <h3>Onde pedir?</h3>
+     <BR>
+      <p class="topic-text">Restaurante Hubener. <br> Rod SC 301, S/N - Km 83 Dona Francisca, Joinville, Santa Catarina 89239-970 Brasil. <br> Contato:55 (47)98809-5217</p>
+      <div id="conteinerA" class="Imgdiv">
+        <img src="./imagens/cul join 2.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerB" class="Imgdiv"> 
+        <img src="./imagens/culi 2.1 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerC" class="Imgdiv"> 
+        <img src="./imagens/culi 2.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerD" class="Imgdiv">
+        <img src="./imagens/culi 2.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+    <br> <br>
+    </div>
+
+
+    <div class="topic">
+     <h2 class="topic-title">Hospedagem</h2>
+
+     <p class="topic-text"><strong><br>Comfort Hotel Joinville</strong><br><br> Localizado em Joinville, o Comfort Hotel Joinville fica a poucos minutos do Museu Fritz Alt e do Museu Arqueológico de Sambaqui. A propriedade oferece quartos com ar-condicionado, Wi-Fi e estacionamento privativo gratuito.
+      Todos os quartos do Comfort Hotel Joinville possuem TV a cabo, geladeira e mesa de trabalho espaçosa.
+      Você pode saborear os pratos quentes e frios no buffet de café da manhã diário do hotel. Durante o resto do dia, o café serve diversas bebidas e petiscos.
+      O Comfort Hotel Joinville também dispõe de academia bem equipada, business center e balcão de turismo, onde você pode organizar visitas às atrações locasi.
+      <br><br>Rua Senador Felipe Schmidt, 460, Joinville, CEP 89201-440, Brasil</p> <br>
+
+    <div id="conteinerA" class="Imgdiv">
+     <img src="./imagens/hotel 1 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+    </div>
+
+    <div id="conteinerB" class="Imgdiv"> 
+     <img src="./imagens/hotel 1.2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+    </div>
+
+    <div id="conteinerC" class="Imgdiv"> 
+     <img src="./imagens/hotel 1.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+    </div>
+
+    <div id="conteinerD" class="Imgdiv">
+     <img src="./imagens/hotel 1.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+    </div>
+ <br> <br>
+    <p class="topic-text"><strong><br>Naalt Hotel Joinville</strong><br><br>Com academia e jardim, o Naalt Hotel Joinville está situado em Joinville, a 4 km do Shopping Mueller Joinville. A propriedade está situada a 7 km da Arena Joinville e a 6 km do Shopping Center Americanas. A propriedade dispõe de um restaurante e o Estádio Ernestão fica a 7 km de distância.
+      No hotel, todos os quartos estão equipados com vista para a cidade. O banheiro privativo está equipado com chuveiro. Todas as unidades incluem mesa de trabalho.
+      Um buffet de café da manhã pode ser apreciado na propriedade.
+      A equipe da recepção 24 horas fala inglês e espanhol.
+      <br><br>Rua XV de Novembro 3994, Joinville, CEP 89216-202, Brasil</p>
+
+      <div id="conteinerA" class="Imgdiv">
+        <img src="./imagens/hotel 2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerB" class="Imgdiv"> 
+        <img src="./imagens/hotel 2.2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerC" class="Imgdiv"> 
+        <img src="./imagens/hotel 2.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerD" class="Imgdiv">
+        <img src="./imagens/hotel 2.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+       <br><br>
+   </div>
+
+   <div class="topic">
+     <h2 class="topic-title">Pontos Turísticos</h2>
+     <p class="topic-text"><strong> Mirante do Morro da Boa Vista</strong><br><br>Oferece uma vista incrivel de toda a cidade de Joinville, sendo possivel subir apé com um trajeto de 2,3 km, mas caso queira, é possivel ir de ônibus onde o mesmo sai
+      do Terminal Central de Joinville ou em ponto de ônibus na subida do Morro da Boa Vista. Em dias chuvosos, transporte pode não funcionar. O tempo de subida A pé é cerca de 40 minutos. De bicicleta, cerca de 25 minutos. De ônibus, cerca de 10 minutos. De táxi, cerca de 15 minutos.
+      <br><br>   Rua Pastor Guilherme Ráu – Saguaçu, Joinville – SC  .</p> <br>
+     <div id="conteinerA" class="Imgdiv">
+      <img src="./imagens/turismo 1 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+     </div>
+ 
+     <div id="conteinerB" class="Imgdiv"> 
+      <img src="./imagens/turismo 1.2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+     </div>
+ 
+     <div id="conteinerC" class="Imgdiv"> 
+      <img src="./imagens/turismo 1.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+     </div>
+ 
+     <div id="conteinerD" class="Imgdiv">
+      <img src="./imagens/turismo 1.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+     </div>
+
+     <br><br><br>
+     <p class="topic-text"><strong> Mirante do Morro da Boa Vista</strong><br><br>Oferece uma vista incrivel de toda a cidade de Joinville, sendo possivel subir apé com um trajeto de 2,3 km, mas caso queira, é possivel ir de ônibus onde o mesmo sai
+      do Terminal Central de Joinville ou em ponto de ônibus na subida do Morro da Boa Vista. Em dias chuvosos, transporte pode não funcionar. O tempo de subida A pé é cerca de 40 minutos. De bicicleta, cerca de 25 minutos. De ônibus, cerca de 10 minutos. De táxi, cerca de 15 minutos.
+      <br><br>   Rua Pastor Guilherme Ráu – Saguaçu, Joinville – SC  .</p> <br><br>
+
+      <div id="conteinerA" class="Imgdiv">
+        <img src="./imagens/turismo 2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerB" class="Imgdiv"> 
+        <img src="./imagens/turismo 2.2 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerC" class="Imgdiv"> 
+        <img src="./imagens/turismo 2.3 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+   
+       <div id="conteinerD" class="Imgdiv">
+        <img src="./imagens/turismo 2.4 join.jpg" alt="Imagem do Tópico 1" class="topic-image">
+       </div>
+  
+       <br><br><br>
+
+    </div>
+  </div>
+
+  </main>
+
+  <footer>Agencia Turismo - Todos os direitos Reservados - 2023 &copy
+    <br><br>
+    <adress>R. Gothard Kaesemodel, 833</adress>
+    <p>Contate nos: (47) 4002-8922 &#9742</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?php
+    session_start();
+    // Verifique se o usuário está logado, se não, redirecione-o para uma página de login
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: login.html");
+        exit;
+    }
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Turismo em Santa Catarina</title>
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+  <title>Turismo em Laguna</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" type="text/css" href="css.css" media="screen">
+
+</head>
+<body>
+  <header id="cabecalho">
+      <div class="header-container">
+        <img src="imagens/tresriscos.png" alt="Logo" class="header-logo" onclick="abrirMenuLateral()">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="Pesquisar por outra cidade">
+          <button class="search-button">Pesquisar</button>
+        </div>
+      </div>
+    </header>
+    
+    <nav id="menuLateral">
+      
+      <a href="#" onclick="fecharMenuLateral()"> Fechar</a>
+      <a href="./TELINIC.html">Home</a>
+      <a href="informacoes_usuario.php">Meus Dados</a>
+      <a href="faleConosco.php">Fale Conosco</a>
+      <a href="desconectar.php">Sair</a>
+      
+    </nav>
+    
+    <h1 class="title">Pontos Turísticos de Santa Catarina</h1>
+  
+    <main id="conteudo">
+
+    <div class="sections-container" >
+    <div class="section" id="Laguna" >
+     <a href="./TELREN.html"><img src="./imagens/TESTE.png" alt="Laguna" class="section-image" style="width: 800px;"></a>
+    </div>
+    
+    <div class="section" id="Joinville">
+      <a href="./TELJOIN.html"><img src="./imagens/joinville.png" alt="Laguna" class="section-image" style="width: 800px;"></a>
+    </div>
+    
+    <div class="section" id="Florianópolis">
+      <h2 class="section-title">Florianópolis</h2>
+      <p class="section-text">Florianópolis é a capital do estado de Santa Catarina, localizada no sul do Brasil. A cidade está situada em uma ilha, chamada de Ilha de Santa Catarina, e também abrange parte do continente. Conhecida por suas praias deslumbrantes, natureza exuberante e qualidade de vida, Florianópolis atrai turistas de todo o mundo.</p>
+      <img src="./imagens/portalflori.jpg" alt="Florianópolis" class="section-image" style="width: 500px;">
+    </div>
+  </div>
+
+ 
+  </main>
+
+  <footer>Agencia Turismo - Todos os direitos Reservados - 2023 &copy
+    <br><br>
+    <adress>R. Gothard Kaesemodel, 833</adress>
+    <p>Contate nos: (47) 4002-8922 &#9742</p>
+  </footer>
+  
+</body>
+</html>
