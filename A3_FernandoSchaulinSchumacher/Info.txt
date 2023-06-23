@@ -1,2 +1,5 @@
 Fernando Schaulin Schumacher
 Aplicação Web com persistência de dados em SQL para as operações CRUD
+Olá Professora, meu carro estragou, então vou subir a apresentação que fiz agora a tarde:
+https://youtu.be/FKN3RoZzUQA
+vou ver se consigo fazer outra apresentação com ele rodando, este vídeo é sobre o código. meu microfone nao ficou bom, no trabalho tem muito barulho então tentei ditar, mas meu microfone não tem redução de ruido, por isso usei o ClipChamp, pra ditar meu texto.
