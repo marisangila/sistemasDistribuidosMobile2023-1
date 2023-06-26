@@ -1,0 +1,117 @@
+# LIVRARIA
+
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Lista de livros
+livros = [
+    'id': 1,
+    'titulo': "O mundo assombrado pelos Demônios",
+    'autor': "Carl Sagan"
+]
+
+# Obtém todos os livros
+@app.route('/livros', methods=['GET'])
+def get_livros():
+    return jsonify(livros)
+
+# Obtém um livro pelo ID
+@app.route('/livros/<int:livro_id>', methods=['GET'])
+def get_livro(livro_id):
+    for livro in livros:
+        if livro['id'] == livro_id:
+            return jsonify(livro)
+    return jsonify({'message': 'Livro não encontrado'}), 404
+
+# Adiciona um novo livro
+@app.route('/livros', methods=['POST'])
+def add_livro():
+    novo_livro = {
+        'id': len(livros) + 1,
+        'titulo': request.json['titulo'],
+        'autor': request.json['autor']
+    }
+    livros.append(novo_livro)
+    return jsonify(novo_livro), 201
+
+# Atualiza um livro existente
+@app.route('/livros/<int:livro_id>', methods=['PUT'])
+def update_livro(livro_id):
+    for livro in livros:
+        if livro['id'] == livro_id:
+            livro['titulo'] = request.json['titulo']
+            livro['autor'] = request.json['autor']
+            return jsonify(livro)
+    return jsonify({'message': 'Livro não encontrado'}), 404
+
+# Exclui um livro
+@app.route('/livros/<int:livro_id>', methods=['DELETE'])
+def delete_livro(livro_id):
+    for livro in livros:
+        if livro['id'] == livro_id:
+            livros.remove(livro)
+            return jsonify({'message': 'Livro excluído'})
+    return jsonify({'message': 'Livro não encontrado'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+-------------------------
+
+LOJA DE JOGOS
+
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Lista de jogos (dados simulados)
+jogos = []
+
+# Rota para obter todos os jogos
+@app.route('/jogos', methods=['GET'])
+def get_jogos():
+    return jsonify(jogos)
+
+# Rota para obter um jogo pelo ID
+@app.route('/jogos/<int:jogo_id>', methods=['GET'])
+def get_jogo(jogo_id):
+    for jogo in jogos:
+        if jogo['id'] == jogo_id:
+            return jsonify(jogo)
+    return jsonify({'message': 'Jogo não encontrado'}), 404
+
+# Rota para adicionar um novo jogo
+@app.route('/jogos', methods=['POST'])
+def add_jogo():
+    novo_jogo = {
+        'id': len(jogos) + 1,
+        'nome': request.json['nome'],
+        'plataforma': request.json['plataforma'],
+        'preco': request.json['preco']
+    }
+    jogos.append(novo_jogo)
+    return jsonify(novo_jogo), 201
+
+# Rota para atualizar um jogo existente
+@app.route('/jogos/<int:jogo_id>', methods=['PUT'])
+def update_jogo(jogo_id):
+    for jogo in jogos:
+        if jogo['id'] == jogo_id:
+            jogo['nome'] = request.json['nome']
+            jogo['plataforma'] = request.json['plataforma']
+            jogo['preco'] = request.json['preco']
+            return jsonify(jogo)
+    return jsonify({'message': 'Jogo não encontrado'}), 404
+
+# Rota para excluir um jogo
+@app.route('/jogos/<int:jogo_id>', methods=['DELETE'])
+def delete_jogo(jogo_id):
+    for jogo in jogos:
+        if jogo['id'] == jogo_id:
+            jogos.remove(jogo)
+            return jsonify({'message': 'Jogo excluído'})
+    return jsonify({'message': 'Jogo não encontrado'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
